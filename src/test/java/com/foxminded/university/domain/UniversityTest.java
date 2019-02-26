@@ -2,8 +2,9 @@ package com.foxminded.university.domain;
 
 import static org.junit.Assert.*;
 
-import java.util.List;
 import java.time.LocalDate;
+import java.util.List;
+
 import org.junit.Test;
 
 public class UniversityTest {

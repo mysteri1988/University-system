@@ -10,7 +10,7 @@ import org.apache.logging.log4j.Logger;
 public class DaoProperties {
 
     private final static Logger log = LogManager.getLogger(DaoProperties.class);
-    private static final String PROPERTIES_FILE = "dao.properties";
+    private static final String PROPERTIES_FILE = "daoDB.properties";
     private static final Properties PROPERTIES = new Properties();
 
     void loadProperty() throws DaoConfigurationException {
