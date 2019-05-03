@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.foxminded</groupId>
-	<artifactId>com.foxminded</artifactId>
+	<artifactId>University</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>University</name>
 	<description>It's simple managing university system project</description>
@@ -34,7 +34,6 @@
 			<artifactId>jstl</artifactId>
 			<version>1.2</version>
 		</dependency>
-		<!-- https://mvnrepository.com/artifact/javax.servlet/servlet-api -->
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
@@ -48,6 +47,7 @@
 		</dependency>
 	</dependencies>
 	<build>
+	    <finalName>${project.artifactId}</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
