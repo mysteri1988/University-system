@@ -6,14 +6,15 @@
 <title>Student card</title>
 </head>
 <body>
-	<div>
-		<h2>Student personal card</h2>
-	</div>
-	<div>
-		<p>
-			Surnama is ${STUDENT.surname}<br> The name is
-			${STUDENT.firstName}<br> Age is ${STUDENT.age}
-		</p>
-	</div>
+  <div>
+    <h2>Student personal card</h2>
+  </div>
+  <div>
+    <p>
+      Firstname:${STUDENT.firstName}<br>
+      Lastname:${STUDENT.surname}<br>
+      Age:${STUDENT.age}<br>
+    </p>
+  </div>
 </body>
 </html>

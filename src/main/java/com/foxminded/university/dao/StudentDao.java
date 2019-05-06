@@ -1,4 +1,4 @@
-package com.foxminded.university.dao;
+ package com.foxminded.university.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -38,7 +38,7 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public Student findById(int id) throws DaoException {
-        String sql = "select * from students where student_id=?";
+        String sql = "select * from students where id=?";
         Student student = null;
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
@@ -71,7 +71,7 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public Student update(Student student) throws DaoException {
-        String sql = "update students set firstName=?,surname=?, age=? where student_id=?";
+        String sql = "update students set firstName=?,surname=?, age=? where id=?";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, student.getFirstName());
@@ -90,7 +90,7 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public void delete(Student student) throws DaoException {
-        String sql = "delete from students where student_id=?";
+        String sql = "delete from students where id=?";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, student.getId());
@@ -102,7 +102,7 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public List<Student> getAll() throws DaoException {
-        String sql = "select * from students order by student_id";
+        String sql = "select * from students order by id";
         List<Student> students = new ArrayList<>();
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
@@ -118,7 +118,7 @@ public class StudentDao implements GenericDao<Student> {
 
     private Student map(ResultSet resultSet) throws SQLException {
         Student student = new Student();
-        student.setId(resultSet.getInt("student_id"));
+        student.setId(resultSet.getInt("id"));
         student.setFirstName(resultSet.getString("firstName"));
         student.setSurname(resultSet.getString("surname"));
         student.setAge(resultSet.getInt("age"));
