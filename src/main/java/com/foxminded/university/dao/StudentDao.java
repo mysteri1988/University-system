@@ -1,4 +1,4 @@
- package com.foxminded.university.dao;
+package com.foxminded.university.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,11 +12,7 @@ import com.foxminded.university.domain.Student;
 
 public class StudentDao implements GenericDao<Student> {
 
-    private DaoFactory daoFactory;
-
-    public StudentDao() {
-        daoFactory = DaoFactory.getInstance();
-    }
+    private DaoFactory daoFactory = DaoFactory.getInstance();
 
     @Override
     public Student create(Student student) throws DaoException {

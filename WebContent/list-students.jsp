@@ -18,20 +18,20 @@
         <tr>
           <th>Student</th>
         </tr>
-        <c:forEach var="tempStudent" items="${STUDENT_LIST}">
-          <c:url var="tempLink" value="students">
-            <c:param name="id" value="${tempStudent.id}" />
+        <c:forEach var="student" items="${STUDENT_LIST}">
+          <c:url var="studentLink" value="studentcard">
+            <c:param name="id" value="${student.id}" />
           </c:url>
           <tr>
-            <td><a href="${tempLink}">${tempStudent.firstName}
-                ${tempStudent.surname}</a></td>
+            <td><a href="${studentLink}">${student.firstName}
+                ${student.surname}</a></td>
           </tr>
         </c:forEach>
       </table>
     </div>
   </div>
   <p>
-    <a href="/com.foxminded/">Back to the main page</a>
+    <a href="university">Back to the main page</a>
   </p>
 </body>
 </html>

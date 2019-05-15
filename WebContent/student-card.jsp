@@ -9,12 +9,11 @@
   <div>
     <h2>Student personal card</h2>
   </div>
-  <div>
-    <p>
-      Firstname:${STUDENT.firstName}<br>
-      Lastname:${STUDENT.surname}<br>
-      Age:${STUDENT.age}<br>
-    </p>
+  <div>  
+      <label for="firstName">Firstname:</label><b>${STUDENT.firstName}</b><br>
+      <label for="lastName">Lastname:</label><b>${STUDENT.surname}</b><br>
+      <label for="age">Age:</label><b>${STUDENT.age}</b><br>
+      <label for="group">Group:</label><b>${GROUP.name}</b>
   </div>
 </body>
 </html>
