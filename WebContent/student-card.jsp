@@ -10,10 +10,10 @@
     <h2>Student personal card</h2>
   </div>
   <div>  
-      <label for="firstName">Firstname:</label><b>${STUDENT.firstName}</b><br>
-      <label for="lastName">Lastname:</label><b>${STUDENT.surname}</b><br>
-      <label for="age">Age:</label><b>${STUDENT.age}</b><br>
-      <label for="group">Group:</label><b>${GROUP.name}</b>
+      <label for="firstName">Firstname:</label><b>${student.firstName}</b><br>
+      <label for="lastName">Lastname:</label><b>${student.surname}</b><br>
+      <label for="age">Age:</label><b>${student.age}</b><br>
+      <label for="group">Group:</label><b>${group.name}</b>
   </div>
 </body>
 </html>

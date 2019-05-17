@@ -21,7 +21,7 @@ public class StudentsServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             studentService = new StudentService();
-        } catch (StudentServiceException exc) {
+        } catch (Exception exc) {
             throw new ServletException("Cannot init StudentServlet", exc);
         }
     }
@@ -29,18 +29,12 @@ public class StudentsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            listStudents(request, response);
+            List<Student> students = studentService.getAll();
+            request.setAttribute("student_list", students);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
+            dispatcher.forward(request, response);
         } catch (Exception e) {
             throw new ServletException(e);
         }
     }
-
-    private void listStudents(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Student> students = studentService.getAll();
-        request.setAttribute("STUDENT_LIST", students);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
-        dispatcher.forward(request, response);
-    }
-
 }

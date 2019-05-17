@@ -25,8 +25,8 @@ public class StudentCardServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             studentService = new StudentService();
-            groupService=new GroupService();
-        } catch (StudentServiceException exc) {
+            groupService = new GroupService();
+        } catch (Exception exc) {
             throw new ServletException("Cannot init StudentCardServlet", exc);
         }
     }
@@ -34,13 +34,23 @@ public class StudentCardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Group theGroup = groupService.findByStudentId(id);
-            Student theStudent = studentService.findById(id);
-            request.setAttribute("STUDENT", theStudent);
-            request.setAttribute("GROUP", theGroup);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/student-card.jsp");
-            dispatcher.forward(request, response);
+            if (request.getParameter("id").matches("[0-9]{3,}")) {
+                int id = Integer.parseInt(request.getParameter("id"));
+                Group group = groupService.findByStudentId(id);
+                Student student = studentService.findById(id);
+                if (student == null) {
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/error-404.html");
+                    dispatcher.forward(request, response);
+                }
+                request.setAttribute("student", student);
+                request.setAttribute("group", group);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/student-card.jsp");
+                dispatcher.forward(request, response);
+            } else {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/error-400.html");
+                dispatcher.forward(request, response);
+            }
+
         } catch (Exception e) {
             throw new ServletException(e);
         }

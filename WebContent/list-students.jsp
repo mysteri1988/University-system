@@ -18,7 +18,7 @@
         <tr>
           <th>Student</th>
         </tr>
-        <c:forEach var="student" items="${STUDENT_LIST}">
+        <c:forEach var="student" items="${student_list}">
           <c:url var="studentLink" value="studentcard">
             <c:param name="id" value="${student.id}" />
           </c:url>
@@ -31,7 +31,7 @@
     </div>
   </div>
   <p>
-    <a href="university">Back to the main page</a>
+    <a href="./university">Back to the main page</a>
   </p>
 </body>
 </html>
