@@ -26,33 +26,29 @@ public class StudentCardServlet extends HttpServlet {
         try {
             studentService = new StudentService();
             groupService = new GroupService();
-        } catch (Exception exc) {
-            throw new ServletException("Cannot init StudentCardServlet", exc);
+        } catch (Exception e) {
+            throw new ServletException("Cannot init StudentCardServlet", e);
         }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            if (request.getParameter("id").matches("[0-9]{3,}")) {
-                int id = Integer.parseInt(request.getParameter("id"));
-                Group group = groupService.findByStudentId(id);
-                Student student = studentService.findById(id);
-                if (student == null) {
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/error-404.html");
-                    dispatcher.forward(request, response);
-                }
-                request.setAttribute("student", student);
-                request.setAttribute("group", group);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/student-card.jsp");
-                dispatcher.forward(request, response);
-            } else {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/error-400.html");
+            int id = Integer.parseInt(request.getParameter("id"));
+            Student student = studentService.findById(id);
+            if (student == null) {
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/error-404.html");
                 dispatcher.forward(request, response);
             }
+            Group group = groupService.findByStudentId(id);
+            request.setAttribute("student", student);
+            request.setAttribute("group", group);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/student-card.jsp");
+            dispatcher.forward(request, response);
 
-        } catch (Exception e) {
-            throw new ServletException(e);
+        } catch (NumberFormatException e) {
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/error-400.html");
+            dispatcher.forward(request, response);
         }
 
     }

@@ -21,8 +21,8 @@ public class StudentsServlet extends HttpServlet {
     public void init() throws ServletException {
         try {
             studentService = new StudentService();
-        } catch (Exception exc) {
-            throw new ServletException("Cannot init StudentServlet", exc);
+        } catch (Exception e) {
+            throw new ServletException("Cannot init StudentServlet", e);
         }
     }
 
