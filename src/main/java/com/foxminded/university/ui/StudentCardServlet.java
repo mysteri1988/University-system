@@ -33,24 +33,19 @@ public class StudentCardServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = 0;
         try {
-            int id = Integer.parseInt(request.getParameter("id"));
-            Student student = studentService.findById(id);
-            if (student == null) {
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/error-404.html");
-                dispatcher.forward(request, response);
-            }
-            Group group = groupService.findByStudentId(id);
-            request.setAttribute("student", student);
-            request.setAttribute("group", group);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/student-card.jsp");
-            dispatcher.forward(request, response);
-
+            id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException e) {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/error-400.html");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("/error").forward(request, response);
         }
-
+        Student student=studentService.findById(id);
+        if (student == null) {
+            request.getRequestDispatcher("/error").forward(request, response);
+        }
+        Group group = groupService.findByStudentId(id);
+        request.setAttribute("student", student);
+        request.setAttribute("group", group);
+        request.getRequestDispatcher("/student-card.jsp").forward(request, response);
     }
-
 }

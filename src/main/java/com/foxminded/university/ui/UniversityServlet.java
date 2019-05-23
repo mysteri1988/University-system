@@ -14,8 +14,7 @@ public class UniversityServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/university.html");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("/university.html").forward(request, response);
         } catch (Exception e) {
             throw new ServletException(e);
         }

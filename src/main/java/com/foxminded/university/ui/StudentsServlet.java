@@ -31,10 +31,9 @@ public class StudentsServlet extends HttpServlet {
         try {
             List<Student> students = studentService.getAll();
             request.setAttribute("student_list", students);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/list-students.jsp");
-            dispatcher.forward(request, response);
+            request.getRequestDispatcher("/list-students.jsp").forward(request, response);
         } catch (Exception e) {
-            throw new ServletException(e);
+            throw new ServletException("Cannot show the list of all student", e);
         }
     }
 }
