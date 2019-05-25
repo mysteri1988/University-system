@@ -17,31 +17,55 @@ public class ErrorHandlerServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
-        Class exceptionClass = (Class) request.getAttribute("javax.servlet.error.exception_type");
+        //Class exceptionClass = (Class) request.getAttribute("javax.servlet.error.exception_type");
         Integer code = (Integer) request.getAttribute("javax.servlet.error.status_code");
         String errorMessage = (String) request.getAttribute("javax.servlet.error.message");
         String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
         String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
 
-        PrintWriter writer = response.getWriter();
+        if (servletName == null) {
+            servletName = "Unknown";
+        }
+
+        if (requestUri == null) {
+            requestUri = "Unknown";
+        }
+
+        PrintWriter out = response.getWriter();
 
         response.setContentType("text/html");
 
-        String title = "Error Handling";
+        String title = "Error details";
         String docType = "<!DOCTYPE html>";
 
-        writer.println(docType + "<html>" + "<head>" + "<title>" + title + "</title>" + "</head>" + "<body>");
+        out.println(docType + "<html>" + "<head>" + "<title>" + title + "</title>" + "</head>" + "<body>");
+        if (code != 500) {
+            out.write("<h3>Error Details</h3>");
+            out.write("<strong>Status Code</strong>:" + code + "<br>");
+            out.write("<strong>Requested URI</strong>:" + requestUri);
+        } else {
+            out.write("<h3>Exception Details</h3>");
+            out.write("<ul><li>Servlet Name:" + servletName + "</li>");
+            out.write("<li>Exception Name:" + exception + "</li>");
+            out.write("<li>Requested URI:" + requestUri + "</li>");
+            out.write("<li>Exception Message:" + errorMessage + "</li>");
+            out.write("</ul>");
+        }
 
-        writer.println("<h1>Error information</h1>");
-        writer.println("Exception: "+exception);
-        writer.println("Exception class: "+exceptionClass);
-        writer.println("Error message: "+errorMessage);
-        writer.println("Code: " + code);
-        writer.println("Request url: "+requestUri);
-        writer.println("Servlet name: "+servletName);
+        out.write("<br><br>");
+        out.write("<a href='./university'>Home Page</a>");
+        out.write("</body></html>");
+        
+        /*writer.println("<h1>Error information</h1>");
+        writer.println("<p>"+"Exception: "+exception+"</p>");
+        writer.println("<p>"+"Exception class: "+exceptionClass+"</p>");
+        writer.println("<p>"+"Error message: "+errorMessage+"</p>");
+        writer.println("<p>"+"Code: " + code+"</p>");
+        writer.println("<p>"+"Request url: "+requestUri+"</p>");
+        writer.println("<p>"+"Servlet name: "+servletName+"</p>");
         
         writer.println("</body>");
-        writer.println("</html>");
+        writer.println("</html>");*/
     }
 
 }

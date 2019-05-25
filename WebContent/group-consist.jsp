@@ -10,6 +10,7 @@
   <div id="wrapper">
     <div id="header">
       <h2>University</h2>
+      <h3>${group.name}</h3>
     </div>
   </div>
   <div id="container">

@@ -64,6 +64,27 @@ public class StudentDao implements GenericDao<Student> {
         }
         return students;
     }
+    
+    /*select students.firstname, students.surname, students.age from students
+    join groups on students.group_id=groups.id
+    where groups.id=1*/
+    
+    public List<Student> findByGroupId(int id) throws DaoException {
+        List<Student> students = new ArrayList<>();
+        String sql = "select * from students "
+                + "join groups on students.group_id=groups.id where groups.id=?";
+        try (Connection connection = daoFactory.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setInt(1, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                students.add(map(resultSet));
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Cannot find students by group id", e);
+        }
+        return students;
+    }
 
     @Override
     public Student update(Student student) throws DaoException {

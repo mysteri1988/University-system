@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xmlns="http://xmlns.jcp.org/xml/ns/javaee"
-  xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
-  id="WebApp_ID" version="3.1">
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
   <display-name>University</display-name>
   <servlet>
     <servlet-name>studentsServlet</servlet-name>
@@ -19,6 +16,14 @@
   <servlet-mapping>
     <servlet-name>universityServlet</servlet-name>
     <url-pattern>/university</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>listGroupServlet</servlet-name>
+    <servlet-class>com.foxminded.university.ui.ListGroupsServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>listGroupServlet</servlet-name>
+    <url-pattern>/listofgroups</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>errorHandler</servlet-name>
@@ -47,7 +52,7 @@
     <exception-type>java.lang.NumberFormatException</exception-type>
     <location>/error</location>
   </error-page>
-    <error-page>
+  <error-page>
     <exception-type>java.lang.Exception</exception-type>
     <location>/error</location>
   </error-page>

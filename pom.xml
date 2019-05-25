@@ -69,6 +69,10 @@
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-war-plugin</artifactId>
+        <version>3.2.2</version>
+        <configuration>
+          <webXml>WebContent\WEB-INF\web.xml</webXml>
+        </configuration>
       </plugin>
     </plugins>
   </build>
