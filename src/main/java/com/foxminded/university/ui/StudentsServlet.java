@@ -1,29 +1,28 @@
 package com.foxminded.university.ui;
 
 import java.io.IOException;
+
+
 import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.foxminded.university.domain.Student;
 import com.foxminded.university.service.StudentService;
-import com.foxminded.university.service.StudentServiceException;
+
+@WebServlet("/listofstudents")
 
 public class StudentsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentService studentService;
 
     @Override
-    public void init() throws ServletException {
-        try {
-            studentService = new StudentService();
-        } catch (Exception e) {
-            throw new ServletException("Cannot init StudentServlet", e);
-        }
+    public void init() {
+        studentService = new StudentService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

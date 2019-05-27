@@ -2,7 +2,6 @@ package com.foxminded.university.ui;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,22 +12,18 @@ import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 import com.foxminded.university.service.GroupService;
 import com.foxminded.university.service.StudentService;
-import com.foxminded.university.service.StudentServiceException;
 
 @WebServlet("/studentcard")
+
 public class StudentCardServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentService studentService;
     private GroupService groupService;
 
     @Override
-    public void init() throws ServletException {
-        try {
-            studentService = new StudentService();
-            groupService = new GroupService();
-        } catch (Exception e) {
-            throw new ServletException("Cannot init StudentCardServlet", e);
-        }
+    public void init() {
+        studentService = new StudentService();
+        groupService = new GroupService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,7 +34,7 @@ public class StudentCardServlet extends HttpServlet {
         } catch (NumberFormatException e) {
             request.getRequestDispatcher("/error").forward(request, response);
         }
-        Student student=studentService.findById(id);
+        Student student = studentService.findById(id);
         if (student == null) {
             request.getRequestDispatcher("/error").forward(request, response);
         }

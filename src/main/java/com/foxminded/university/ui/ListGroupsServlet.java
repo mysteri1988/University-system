@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,16 +12,15 @@ import javax.servlet.http.HttpServletResponse;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.service.GroupService;
 
+@WebServlet("/listofgroups")
+
 public class ListGroupsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private GroupService groupService;
 
-    public void init() throws ServletException {
-        try {
-            groupService = new GroupService();
-        } catch (Exception e) {
-            throw new ServletException("Cannot init GroupServlet", e);
-        }
+    public void init() {
+        groupService = new GroupService();
+
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

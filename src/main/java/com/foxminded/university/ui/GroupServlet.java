@@ -15,6 +15,7 @@ import com.foxminded.university.service.GroupService;
 import com.foxminded.university.service.StudentService;
 
 @WebServlet("/group")
+
 public class GroupServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentService studentService;
@@ -22,13 +23,9 @@ public class GroupServlet extends HttpServlet {
     
 
     @Override
-    public void init() throws ServletException {
-        try {
-            studentService = new StudentService();
-            groupService=new GroupService();
-        } catch (Exception e) {
-            throw new ServletException("Cannot init GroupServlet", e);
-        }
+    public void init() {
+        studentService = new StudentService();
+        groupService = new GroupService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -48,7 +48,7 @@ public class GroupDao implements GenericDao<Group> {
     }
     
     public Group findByStudentId(int id) throws DaoException {
-        String sql = "select groups.id, groups.name from groups join students on students.group_id=groups.id where students.id=?";
+        String sql = "select * from groups join students on students.group_id = groups.id where students.id = ?";
         Group group = null;
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
