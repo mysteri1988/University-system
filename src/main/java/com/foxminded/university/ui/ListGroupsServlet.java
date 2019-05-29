@@ -12,15 +12,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.service.GroupService;
 
-@WebServlet("/listofgroups")
-
+@WebServlet("/groups")
 public class ListGroupsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private GroupService groupService;
 
     public void init() {
         groupService = new GroupService();
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -9,20 +9,26 @@
 </head>
 
 <body>
-<c:set var="statusCode" value="${code}"/>
+  <c:set var="statusCode" value="${code}" />
   <c:choose>
-    <c:when test="${statusCode!=500}">
+    <c:when test="${statusCode!=500 && statusCode!=400}">
+      <p style="text-align:center;font-size:20px">PAGE NOT FOUND<p>
       <h3>Error Details</h3>
       <strong>Status Code</strong>: ${code} <br>
-      <strong>Requested URI</strong>: ${requesturi}
-  </c:when>
+      <strong>Requested URI</strong>: ${requesturi} <br>
+    </c:when>
+    <c:when test="${statusCode==400}">
+      <h3>Error Details</h3>
+      <strong>Status Code</strong>: ${code} <br>
+      <strong>Requested URI</strong>: ${requesturi} <br>
+      <strong>Erro message</strong>: ${errormessage} <br>
+    </c:when>
     <c:otherwise>
       <h3>Exception Details</h3>
       <ul>
         <li>Servlet Name: ${servletame}</li>
         <li>Exception Name: ${exception}</li>
         <li>Requested URI: ${requesturi}</li>
-        <li>Exception Message: ${errormessage}</li>
       </ul>
     </c:otherwise>
   </c:choose>

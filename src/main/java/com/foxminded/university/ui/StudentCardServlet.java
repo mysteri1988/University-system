@@ -14,7 +14,6 @@ import com.foxminded.university.service.GroupService;
 import com.foxminded.university.service.StudentService;
 
 @WebServlet("/studentcard")
-
 public class StudentCardServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private StudentService studentService;
@@ -36,6 +35,7 @@ public class StudentCardServlet extends HttpServlet {
         }
         Student student = studentService.findById(id);
         if (student == null) {
+            request.setAttribute("error", "Can't find selected student");
             request.getRequestDispatcher("/error").forward(request, response);
         }
         Group group = groupService.findByStudentId(id);

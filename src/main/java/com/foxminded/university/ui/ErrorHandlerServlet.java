@@ -2,8 +2,6 @@ package com.foxminded.university.ui;
 
 import java.io.IOException;
 
-
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "errorHandler", urlPatterns = "/error", loadOnStartup = 1)
-
 public class ErrorHandlerServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
@@ -20,7 +17,7 @@ public class ErrorHandlerServlet extends HttpServlet {
 
         Exception exception = (Exception) request.getAttribute("javax.servlet.error.exception");
         Integer code = (Integer) request.getAttribute("javax.servlet.error.status_code");
-        String errorMessage = (String) request.getAttribute("javax.servlet.error.message");
+        String errorMessage = (String) request.getAttribute("error");
         String requestUri = (String) request.getAttribute("javax.servlet.error.request_uri");
         String servletName = (String) request.getAttribute("javax.servlet.error.servlet_name");
 
