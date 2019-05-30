@@ -11,7 +11,7 @@
 <body>
   <c:set var="statusCode" value="${code}" />
   <c:choose>
-    <c:when test="${statusCode!=500 && statusCode!=400}">
+    <c:when test="${statusCode==404}">
       <p style="text-align:center;font-size:20px">PAGE NOT FOUND<p>
       <h3>Error Details</h3>
       <strong>Status Code</strong>: ${code} <br>

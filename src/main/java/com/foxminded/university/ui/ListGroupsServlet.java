@@ -15,6 +15,7 @@ import com.foxminded.university.service.GroupService;
 @WebServlet("/groups")
 public class ListGroupsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
     private GroupService groupService;
 
     public void init() {

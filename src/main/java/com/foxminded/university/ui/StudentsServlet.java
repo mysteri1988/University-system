@@ -16,6 +16,7 @@ import com.foxminded.university.service.StudentService;
 @WebServlet("/listofstudents")
 public class StudentsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    
     private StudentService studentService;
 
     @Override
