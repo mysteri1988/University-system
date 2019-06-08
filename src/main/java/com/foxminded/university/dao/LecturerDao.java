@@ -23,6 +23,7 @@ public class LecturerDao implements GenericDao<Lecturer> {
             statement.setString(2, lecturer.getSurname());
             statement.setInt(3, lecturer.getAge());
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 lecturer.setId(generatedKey.getInt(1));
             }

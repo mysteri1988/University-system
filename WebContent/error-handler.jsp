@@ -21,7 +21,7 @@
       <h3>Error Details</h3>
       <strong>Status Code</strong>: ${code} <br>
       <strong>Requested URI</strong>: ${requesturi} <br>
-      <strong>Erro message</strong>: ${errormessage} <br>
+      <strong>Error message</strong>: ${errormessage} <br>
     </c:when>
     <c:otherwise>
       <h3>Exception Details</h3>

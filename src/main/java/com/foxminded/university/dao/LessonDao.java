@@ -23,6 +23,7 @@ public class LessonDao implements GenericDao<Lesson> {
             statement.setObject(1, lesson.getStartTime());
             statement.setObject(1, lesson.getEndTime());
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 lesson.setId(generatedKey.getInt(1));
             }

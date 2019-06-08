@@ -14,17 +14,31 @@
   </div>
   <div id="container">
     <div id="content">
+      <input type="button" value="Add Student"
+        onclick="window.location.href='add-student-form.jsp';return false;"
+        class="add-student-button" />
       <table>
         <tr>
           <th>Student</th>
+          <th>Action</th>
         </tr>
         <c:forEach var="student" items="${student_list}">
           <c:url var="studentLink" value="studentcard">
             <c:param name="id" value="${student.id}" />
           </c:url>
+          <c:url var="loadStudent" value="loadstudent">
+            <c:param name="id" value="${student.id}" />
+          </c:url>
+          <c:url var="deleteStudent" value="deletestudent">
+            <c:param name="id" value="${student.id}" />
+          </c:url>
           <tr>
             <td><a href="${studentLink}">${student.firstName}
                 ${student.surname}</a></td>
+            <td><a href="${loadStudent}">Update</a> | <a
+              href="${deleteStudent}"
+              onclick="
+            if (!(confirm('Are you sure you want to delete this student?'))) return false">Delete</a></td>
           </tr>
         </c:forEach>
       </table>

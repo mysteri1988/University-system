@@ -21,6 +21,7 @@ public class FacultyDao implements GenericDao<Faculty> {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, faculty.getTitle());
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 faculty.setId(generatedKey.getInt(1));
             }

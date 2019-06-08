@@ -21,6 +21,7 @@ public class GroupDao implements GenericDao<Group> {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, group.getName());
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 group.setId(generatedKey.getInt(1));
             }
@@ -64,19 +65,20 @@ public class GroupDao implements GenericDao<Group> {
 
     }
     
-    public List<Group> findByName(String name) throws DaoException {
-        List<Group> groups = new ArrayList<>();
+    public Group findByName(String name) throws DaoException {
+        Group group = null;
         String sql = "select * from groups where name=?";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                groups.add(map(resultSet));
+            if (resultSet.next()) {
+                group = map(resultSet);
             }
         } catch (SQLException e) {
             throw new DaoException("Cannot find groups by name", e);
         }
-        return groups;
+        return group;
     }
 
     @Override

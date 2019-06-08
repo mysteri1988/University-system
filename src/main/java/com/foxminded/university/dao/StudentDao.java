@@ -16,13 +16,15 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public Student create(Student student) throws DaoException {
-        String sql = "insert into students (firstName,surname,age) values(?,?,?)";
+        String sql = "insert into students (firstName,surname,age, group_id) values(?,?,?,?)";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getSurname());
             statement.setInt(3, student.getAge());
+            statement.setInt(4, student.getGroupId());
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 student.setId(generatedKey.getInt(1));
             }
@@ -83,13 +85,14 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public Student update(Student student) throws DaoException {
-        String sql = "update students set firstName=?,surname=?, age=? where id=?";
+        String sql = "update students set firstName=?,surname=?, age=?, group_id=? where id=?";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getSurname());
             statement.setInt(3, student.getAge());
-            statement.setInt(4, student.getId());
+            statement.setInt(4, student.getGroupId());
+            statement.setInt(5, student.getId());
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
                 throw new DaoException("Updating user failed, no rows affected");

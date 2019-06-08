@@ -29,6 +29,7 @@ public class ClassRoomDao implements GenericDao<ClassRoom> {
             statement.setInt(1, classroom.getBuildingNumber());
             log.trace("Create resultSet");
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 classroom.setId(generatedKey.getInt(1));
                 log.info("Created new {1}", classroom);

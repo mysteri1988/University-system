@@ -21,6 +21,7 @@ public class SubjectDao implements GenericDao<Subject> {
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, subject.getTitle());
             ResultSet generatedKey = statement.getGeneratedKeys();
+            statement.execute();
             if (generatedKey.next()) {
                 subject.setId(generatedKey.getInt(1));
             }

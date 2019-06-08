@@ -19,8 +19,8 @@ public class StudentService {
     public List<Student> findBySurname(String surname) {
         return studentDao.findBySurname(surname);
     }
-    
-    public List<Student> findByGroupId(int id){
+
+    public List<Student> findByGroupId(int id) {
         return studentDao.findByGroupId(id);
     }
 

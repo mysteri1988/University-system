@@ -16,6 +16,14 @@ public class Person {
         this.age = age;
     }
 
+    public Person(int id, String firstName, String surname, int age) {
+        super();
+        this.id = id;
+        this.firstName = firstName;
+        this.surname = surname;
+        this.age = age;
+    }
+
     public String getFirstName() {
         return firstName;
     }

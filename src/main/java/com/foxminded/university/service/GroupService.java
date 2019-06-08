@@ -21,7 +21,7 @@ public class GroupService {
         return groupDao.findByStudentId(id);
     }
 
-    public List<Group> findByName(String name) {
+    public Group findByName(String name) {
         return groupDao.findByName(name);
     }
 
