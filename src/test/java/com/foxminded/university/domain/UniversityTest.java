@@ -255,7 +255,7 @@ public class UniversityTest {
     public void ShouldreturnDescriptionClassOfStudent() {
         student.setGroup(group);
         String expected = "Student [" + "id=" + student.getId() + ", firstName=" + student.getFirstName() + ", surname="
-                + student.getSurname() + ", age=" + student.getAge() + " " + group + student.getGroupId()+"]";
+                + student.getSurname() + ", age=" + student.getAge() + " " + group +"]";
         assertEquals(expected, student.toString());
     }
 

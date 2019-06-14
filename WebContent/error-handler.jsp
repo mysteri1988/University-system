@@ -26,7 +26,7 @@
     <c:otherwise>
       <h3>Exception Details</h3>
       <ul>
-        <li>Servlet Name: ${servletame}</li>
+        <li>Servlet Name: ${servletname}</li>
         <li>Exception Name: ${exception}</li>
         <li>Requested URI: ${requesturi}</li>
       </ul>

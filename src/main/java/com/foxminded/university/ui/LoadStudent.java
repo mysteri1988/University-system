@@ -1,6 +1,8 @@
 package com.foxminded.university.ui;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +24,7 @@ public class LoadStudent extends HttpServlet {
     @Override
     public void init() {
         studentService = new StudentService();
-        groupService = new GroupService();
+        groupService=new GroupService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,14 +35,14 @@ public class LoadStudent extends HttpServlet {
         } catch (NumberFormatException e) {
             request.getRequestDispatcher("/error").forward(request, response);
         }
+        List<Group> groups=groupService.getAll();
         Student student = studentService.findById(id);
         if (student == null) {
             request.setAttribute("error", "Can't find selected student");
             request.getRequestDispatcher("/error").forward(request, response);
         }
-        Group group = groupService.findByStudentId(id);
         request.setAttribute("student", student);
-        request.setAttribute("group", group);
+        request.setAttribute("group_list", groups);
         request.getRequestDispatcher("/update-student.jsp").forward(request, response);
     }
 

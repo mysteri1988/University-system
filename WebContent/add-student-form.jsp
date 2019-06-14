@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -17,7 +18,7 @@
   <div id="container">
     <h3>Add Student</h3>
     <form action="addstudent" method="GET">
-      <input type="hidden"/>
+      <input type="hidden" />
       <table>
         <tbody>
           <tr>
@@ -34,7 +35,11 @@
           </tr>
           <tr>
             <td><label>Group name</label></td>
-            <td><input type="text" name="groupName"></td>
+            <td><select name="groupName">
+                <c:forEach items="${group_list}" var="group">
+                  <option value="${group.name}">${group.name}</option>
+                </c:forEach>
+            </select></td>
           </tr>
           <tr>
             <td><label></label></td>

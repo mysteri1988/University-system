@@ -16,14 +16,12 @@ import com.foxminded.university.service.StudentService;
 @WebServlet("/studentcard")
 public class StudentCardServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    
+
     private StudentService studentService;
-    private GroupService groupService;
 
     @Override
     public void init() {
         studentService = new StudentService();
-        groupService = new GroupService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -39,9 +37,7 @@ public class StudentCardServlet extends HttpServlet {
             request.setAttribute("error", "Can't find selected student");
             request.getRequestDispatcher("/error").forward(request, response);
         }
-        Group group = groupService.findByStudentId(id);
         request.setAttribute("student", student);
-        request.setAttribute("group", group);
         request.getRequestDispatcher("/student-card.jsp").forward(request, response);
     }
 }

@@ -19,31 +19,28 @@ public class AddStudent extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private StudentService studentService;
-    private GroupService groupService;
 
     @Override
     public void init() {
         studentService = new StudentService();
-        groupService = new GroupService();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
         String surname = request.getParameter("surname");
-        int age = Integer.parseInt(request.getParameter("age"));
-        String groupName = request.getParameter("groupName");
-        List<Group> groups = groupService.getAll();
         String returnPage = "";
-        for (Group group : groups) {
-            if (group.getName().equals(groupName)) {
-                Group currentGroup = groupService.findByName(groupName);
-                int groupId = currentGroup.getId();
-                Student student = new Student(firstName, surname, age, groupId);
+        if (firstName.isEmpty() || surname.isEmpty()) {
+            request.setAttribute("exception", "The firstName or surname field is empty");
+            returnPage = "/error";
+        } else {
+            try {
+                int age = Integer.parseInt(request.getParameter("age"));
+                String groupName = request.getParameter("groupName");
+                Student student = new Student(firstName, surname, age, groupName);
                 studentService.create(student);
                 returnPage = "/listofstudents";
-            } else {
-                request.setAttribute("error", "Can't find current group for Student");
+            } catch (NumberFormatException e) {
                 returnPage = "/error";
             }
         }
