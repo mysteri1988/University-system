@@ -24,10 +24,11 @@ public class UpdateStudent extends HttpServlet {
     public void init() {
         studentService = new StudentService();
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         String firstName = request.getParameter("firstName");
         String surname = request.getParameter("surname");
         String returnPage = "";
@@ -47,5 +48,11 @@ public class UpdateStudent extends HttpServlet {
             }
         }
         request.getRequestDispatcher(returnPage).forward(request, response);
+    }
+
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
     }
 }

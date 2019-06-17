@@ -17,7 +17,7 @@
   </div>
   <div id="container">
     <h3>Add Student</h3>
-    <form action="addstudent" method="GET">
+    <form action="addstudent" method="POST">
       <input type="hidden" />
       <table>
         <tbody>

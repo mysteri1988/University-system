@@ -17,7 +17,7 @@
   </div>
   <div id="container">
     <h3>Update student</h3>
-    <form action="updatestudent" method="GET">
+    <form action="updatestudent" method="POST">
       <input type="hidden" name="id" value="${student.id}" />
       <table>
         <tbody>

@@ -20,8 +20,9 @@ public class DeleteStudent extends HttpServlet {
     public void init() {
         studentService = new StudentService();
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = 0;
         try {
@@ -37,4 +38,11 @@ public class DeleteStudent extends HttpServlet {
         studentService.delete(student);
         request.getRequestDispatcher("listofstudents").forward(request, response);
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        doPost(request,response);
+    }
+    
+    
 }

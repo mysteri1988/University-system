@@ -25,7 +25,8 @@ public class AddStudent extends HttpServlet {
         studentService = new StudentService();
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String firstName = request.getParameter("firstName");
         String surname = request.getParameter("surname");
@@ -46,4 +47,11 @@ public class AddStudent extends HttpServlet {
         }
         request.getRequestDispatcher(returnPage).forward(request, response);
     }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doPost(request, response);
+    }
+
 }

@@ -20,11 +20,7 @@ public class StudentService {
         return studentDao.findBySurname(surname);
     }
 
-    /*public List<Student> findByGroupId(int id) {
-        return studentDao.findByGroupId(id);
-    }*/
-    
-    public List<Student> findByGroupName(String groupName){
+    public List<Student> findByGroupName(String groupName) {
         return studentDao.findByGroupName(groupName);
     }
 
