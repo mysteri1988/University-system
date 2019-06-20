@@ -36,13 +36,7 @@ public class DeleteStudent extends HttpServlet {
             request.getRequestDispatcher("/error").forward(request, response);
         }
         studentService.delete(student);
-        request.getRequestDispatcher("listofstudents").forward(request, response);
+        request.getRequestDispatcher("/list-students.jsp").forward(request, response);
     }
 
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request,response);
-    }
-    
-    
 }

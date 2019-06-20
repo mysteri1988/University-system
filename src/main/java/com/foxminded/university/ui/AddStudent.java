@@ -47,11 +47,4 @@ public class AddStudent extends HttpServlet {
         }
         request.getRequestDispatcher(returnPage).forward(request, response);
     }
-
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doPost(request, response);
-    }
-
 }
