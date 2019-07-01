@@ -17,7 +17,7 @@
   </div>
   <div id="container">
     <h3>Add Student</h3>
-    <form action="addstudent" method="POST">
+    <form action="students" method="POST">
       <input type="hidden" />
       <table>
         <tbody>
@@ -50,7 +50,7 @@
     </form>
     <div style="clear: both;"></div>
     <p>
-      <a href="./university">Back to list of students</a>
+      <a href="./students">Back to list of students</a>
     </p>
   </div>
 </body>

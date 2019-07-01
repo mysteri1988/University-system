@@ -19,10 +19,12 @@ public class UpdateStudent extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     private StudentService studentService;
+    private GroupService groupService;
 
     @Override
     public void init() {
         studentService = new StudentService();
+        groupService=new GroupService();
     }
 
     @Override
@@ -39,7 +41,9 @@ public class UpdateStudent extends HttpServlet {
                 int id = Integer.parseInt(request.getParameter("id"));
                 int age = Integer.parseInt(request.getParameter("age"));
                 String groupName = request.getParameter("groupName");
-                Student student = new Student(id, firstName, surname, age, groupName);
+                Group group=groupService.findByName(groupName);
+                int groupId=group.getId();
+                Student student = new Student(id, firstName, surname, age, groupId);
                 studentService.update(student);
                 returnPage = "/listofstudents";
             } catch (NumberFormatException e) {

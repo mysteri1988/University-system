@@ -32,7 +32,7 @@ public class GroupServlet extends HttpServlet {
         int id = 0;
         id = Integer.parseInt(request.getParameter("id"));
         Group group = groupService.findById(id);
-        List<Student> students = studentService.findByGroupName(group.getName());
+        List<Student> students = studentService.findByGroupId(id);
         request.setAttribute("student_list", students);
         request.setAttribute("group", group);
         request.getRequestDispatcher("/group-consist.jsp").forward(request, response);

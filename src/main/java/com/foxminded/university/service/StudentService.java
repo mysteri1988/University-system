@@ -19,9 +19,9 @@ public class StudentService {
     public List<Student> findBySurname(String surname) {
         return studentDao.findBySurname(surname);
     }
-
-    public List<Student> findByGroupName(String groupName) {
-        return studentDao.findByGroupName(groupName);
+    
+    public List<Student> findByGroupId(int groupId){
+        return studentDao.findGroupId(groupId);
     }
 
     public Student update(Student student) {
@@ -35,5 +35,4 @@ public class StudentService {
     public List<Student> getAll() {
         return studentDao.getAll();
     }
-
 }

@@ -17,7 +17,7 @@
   </div>
   <div id="container">
     <h3>Update student</h3>
-    <form action="updatestudent" method="POST">
+    <form action="student" method="POST">
       <input type="hidden" name="id" value="${student.id}" />
       <table>
         <tbody>
@@ -53,7 +53,7 @@
     </form>
     <div style="clear: both;"></div>
     <p>
-      <a href="./university">Back to list of students</a>
+      <a href="./students">Back to list of students</a>
     </p>
   </div>
 </body>

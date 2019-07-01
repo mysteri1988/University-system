@@ -23,7 +23,7 @@
           <th>Action</th>
         </tr>
         <c:forEach var="student" items="${student_list}">
-          <c:url var="studentLink" value="studentcard">
+          <c:url var="studentLink" value="student">
             <c:param name="id" value="${student.id}" />
           </c:url>
           <c:url var="loadStudent" value="loadstudent">
@@ -35,10 +35,10 @@
           <tr>
             <td><a href="${studentLink}">${student.firstName}
                 ${student.surname}</a></td>
-            <td><a href="${loadStudent}">Update</a> | <a
-              href="${deleteStudent}"
-              onclick="
-            if (!(confirm('Are you sure you want to delete this student?'))) return false">Delete</a></td>
+            <td><a href="${loadStudent}">Update</a>
+              <form action="deletestudent" method="POST">
+                <input type="submit" value="Delete" />
+              </form></td>
           </tr>
         </c:forEach>
       </table>

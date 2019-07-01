@@ -1,6 +1,8 @@
 package com.foxminded.university.ui;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -20,7 +22,12 @@ public class DeleteStudent extends HttpServlet {
     public void init() {
         studentService = new StudentService();
     }
-    
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,14 +36,16 @@ public class DeleteStudent extends HttpServlet {
             id = Integer.parseInt(request.getParameter("id"));
         } catch (NumberFormatException e) {
             request.getRequestDispatcher("/error").forward(request, response);
+            return;
         }
         Student student = studentService.findById(id);
         if (student == null) {
             request.setAttribute("error", "Can't find selected student");
             request.getRequestDispatcher("/error").forward(request, response);
+            return;
         }
         studentService.delete(student);
-        request.getRequestDispatcher("/list-students.jsp").forward(request, response);
+
     }
 
 }

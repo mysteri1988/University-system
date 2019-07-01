@@ -16,13 +16,13 @@ public class StudentDao implements GenericDao<Student> {
 
     @Override
     public Student create(Student student) throws DaoException {
-        String sql = "insert into students (firstName,surname,age, group_name) values(?,?,?,?)";
+        String sql = "insert into students (firstName,surname,age, group_id) values(?,?,?,?)";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getSurname());
             statement.setInt(3, student.getAge());
-            statement.setString(4, student.getGroupName());
+            statement.setInt(4, student.getGroupId());
             ResultSet generatedKey = statement.getGeneratedKeys();
             statement.execute();
             if (generatedKey.next()) {
@@ -67,12 +67,12 @@ public class StudentDao implements GenericDao<Student> {
         return students;
     }
 
-    public List<Student> findByGroupName(String groupName) throws DaoException {
+    public List<Student> findGroupId(int groupId) throws DaoException {
         List<Student> students = new ArrayList<>();
-        String sql = "select * from students where group_name=?";
+        String sql = "select * from students where group_id=?";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
-            statement.setString(1, groupName);
+            statement.setInt(1, groupId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 students.add(map(resultSet));
@@ -85,13 +85,13 @@ public class StudentDao implements GenericDao<Student> {
     
     @Override
     public Student update(Student student) throws DaoException {
-        String sql = "update students set firstName=?,surname=?, age=?, group_name=? where id=?";
+        String sql = "update students set firstName=?,surname=?, age=?, group_id=? where id=?";
         try (Connection connection = daoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getSurname());
             statement.setInt(3, student.getAge());
-            statement.setString(4, student.getGroupName());
+            statement.setInt(4, student.getGroupId());
             statement.setInt(5, student.getId());
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
@@ -137,7 +137,7 @@ public class StudentDao implements GenericDao<Student> {
         student.setFirstName(resultSet.getString("firstName"));
         student.setSurname(resultSet.getString("surname"));
         student.setAge(resultSet.getInt("age"));
-        student.setGroupName(resultSet.getString("group_name"));
+        student.setGroupId(resultSet.getInt("group_id"));
         return student;
     }
 
