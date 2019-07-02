@@ -1,7 +1,6 @@
 package com.foxminded.university.ui;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,11 +23,6 @@ public class DeleteStudent extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        doPost(req, resp);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = 0;
@@ -45,7 +39,7 @@ public class DeleteStudent extends HttpServlet {
             return;
         }
         studentService.delete(student);
-
+        response.sendRedirect("students");
     }
 
 }

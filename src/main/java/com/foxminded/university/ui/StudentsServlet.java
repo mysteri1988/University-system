@@ -47,9 +47,7 @@ public class StudentsServlet extends HttpServlet {
         } else {
             try {
                 int age = Integer.parseInt(request.getParameter("age"));
-                String groupName = request.getParameter("groupName");
-                Group group=groupService.findByName(groupName);
-                int groupId=group.getId();
+                int groupId=Integer.parseInt(request.getParameter("groupId"));
                 Student student = new Student(firstName, surname, age, groupId);
                 studentService.create(student);
                 List<Student> students = studentService.getAll();

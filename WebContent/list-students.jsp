@@ -15,7 +15,7 @@
   <div id="container">
     <div id="content">
       <input type="button" value="Add Student"
-        onclick="window.location.href='./loadgroup';return false;"
+        onclick="window.location.href='./loadstudentform';return false;"
         class="add-student-button" />
       <table>
         <tr>
@@ -36,7 +36,7 @@
             <td><a href="${studentLink}">${student.firstName}
                 ${student.surname}</a></td>
             <td><a href="${loadStudent}">Update</a>
-              <form action="deletestudent" method="POST">
+              <form action="${deleteStudent}" method="POST">
                 <input type="submit" value="Delete" />
               </form></td>
           </tr>

@@ -35,9 +35,9 @@
           </tr>
           <tr>
             <td><label>Group name</label></td>
-            <td><select name="groupName">
+            <td><select name="groupId">
                 <c:forEach items="${group_list}" var="group">
-                  <option value="${group.name}">${group.name}</option>
+                  <option value="${group.id}">${group.name}</option>
                 </c:forEach>
             </select></td>
           </tr>
