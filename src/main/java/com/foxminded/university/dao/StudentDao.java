@@ -12,12 +12,10 @@ import com.foxminded.university.domain.Student;
 
 public class StudentDao implements GenericDao<Student> {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-
     @Override
     public Student create(Student student) throws DaoException {
         String sql = "insert into students (firstName,surname,age, group_id) values(?,?,?,?)";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getSurname());
@@ -38,7 +36,7 @@ public class StudentDao implements GenericDao<Student> {
     public Student findById(int id) throws DaoException {
         String sql = "select * from students where id=?";
         Student student = null;
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -54,7 +52,7 @@ public class StudentDao implements GenericDao<Student> {
     public List<Student> findBySurname(String surname) throws DaoException {
         List<Student> students = new ArrayList<>();
         String sql = "select * from students where surname=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, surname);
             ResultSet resultSet = statement.executeQuery();
@@ -70,7 +68,7 @@ public class StudentDao implements GenericDao<Student> {
     public List<Student> findGroupId(int groupId) throws DaoException {
         List<Student> students = new ArrayList<>();
         String sql = "select * from students where group_id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, groupId);
             ResultSet resultSet = statement.executeQuery();
@@ -82,11 +80,11 @@ public class StudentDao implements GenericDao<Student> {
         }
         return students;
     }
-    
+
     @Override
     public Student update(Student student) throws DaoException {
         String sql = "update students set firstName=?,surname=?, age=?, group_id=? where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, student.getFirstName());
             statement.setString(2, student.getSurname());
@@ -106,7 +104,7 @@ public class StudentDao implements GenericDao<Student> {
     @Override
     public void delete(Student student) throws DaoException {
         String sql = "delete from students where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, student.getId());
             statement.executeUpdate();
@@ -119,7 +117,7 @@ public class StudentDao implements GenericDao<Student> {
     public List<Student> getAll() throws DaoException {
         String sql = "select * from students order by id";
         List<Student> students = new ArrayList<>();
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DBConnection.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
