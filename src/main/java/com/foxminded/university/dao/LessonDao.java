@@ -13,12 +13,10 @@ import com.foxminded.university.domain.Lesson;
 
 public class LessonDao implements GenericDao<Lesson> {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-
     @Override
     public Lesson create(Lesson lesson) throws DaoException {
         String sql = "insert into lessons (startTime,endTime) values(?,?)";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setObject(1, lesson.getStartTime());
             statement.setObject(1, lesson.getEndTime());
@@ -37,7 +35,7 @@ public class LessonDao implements GenericDao<Lesson> {
     public Lesson findById(int id) throws DaoException {
         String sql = "select * from lessons where id=?";
         Lesson lesson = null;
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -53,7 +51,7 @@ public class LessonDao implements GenericDao<Lesson> {
     public Lesson findByStartTime(LocalDateTime startTime) throws DaoException {
         Lesson lesson = null;
         String sql = "select * from lessons where startTime=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setObject(1, startTime);
             ResultSet resultSet = statement.executeQuery();
@@ -69,7 +67,7 @@ public class LessonDao implements GenericDao<Lesson> {
     public Lesson findByEndTime(LocalDateTime endTime) throws DaoException {
         Lesson lesson = null;
         String sql = "select * from lessons where endTime=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setObject(1, endTime);
             ResultSet resultSet = statement.executeQuery();
@@ -85,7 +83,7 @@ public class LessonDao implements GenericDao<Lesson> {
     @Override
     public Lesson update(Lesson lesson) throws DaoException {
         String sql = "update lessons set startTime=?, endTime=? where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setObject(1, lesson.getStartTime());
             statement.setObject(2, lesson.getEndTime());
@@ -103,7 +101,7 @@ public class LessonDao implements GenericDao<Lesson> {
     @Override
     public void delete(Lesson lesson) throws DaoException {
         String sql = "delete from lessons where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, lesson.getId());
             statement.executeUpdate();
@@ -116,7 +114,7 @@ public class LessonDao implements GenericDao<Lesson> {
     public List<Lesson> getAll() throws DaoException {
         String sql = "select * from lessons order by id";
         List<Lesson> lessons = new ArrayList<>();
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

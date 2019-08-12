@@ -12,12 +12,11 @@ import com.foxminded.university.domain.Subject;
 
 public class SubjectDao implements GenericDao<Subject> {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
 
     @Override
     public Subject create(Subject subject) throws DaoException {
         String sql = "insert into subjects (Title) values(?)";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, subject.getTitle());
             ResultSet generatedKey = statement.getGeneratedKeys();
@@ -35,7 +34,7 @@ public class SubjectDao implements GenericDao<Subject> {
     public Subject findById(int id) throws DaoException {
         Subject subject = null;
         String sql = "select * from subjects where title=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -51,7 +50,7 @@ public class SubjectDao implements GenericDao<Subject> {
     public Subject findByTitle(String title) throws DaoException {
         Subject subject = null;
         String sql = "select * from subjects where title=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, title);
             ResultSet resultSet = statement.executeQuery();
@@ -67,7 +66,7 @@ public class SubjectDao implements GenericDao<Subject> {
     @Override
     public Subject update(Subject subject) throws DaoException {
         String sql = "update subjects set title=? where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, subject.getTitle());
             statement.setInt(2, subject.getId());
@@ -84,7 +83,7 @@ public class SubjectDao implements GenericDao<Subject> {
     @Override
     public void delete(Subject subject) throws DaoException {
         String sql = "delete from subjects where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, subject.getId());
             statement.executeUpdate();
@@ -97,7 +96,7 @@ public class SubjectDao implements GenericDao<Subject> {
     public List<Subject> getAll() throws DaoException {
         String sql = "select * from subjects order by id";
         List<Subject> subjects = new ArrayList<>();
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

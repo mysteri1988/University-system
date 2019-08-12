@@ -17,14 +17,12 @@ public class ClassRoomDao implements GenericDao<ClassRoom> {
 
     private final static Logger log = LogManager.getLogger(ClassRoomDao.class);
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-
     @Override
     public ClassRoom create(ClassRoom classroom) throws DaoException {
         log.trace("Start creating classroom object");
         String sql = "insert into classrooms (buildingNumber,roomNumber) values(?,?)";
         log.trace("Create connection and statement");
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setInt(1, classroom.getBuildingNumber());
             log.trace("Create resultSet");
@@ -48,7 +46,7 @@ public class ClassRoomDao implements GenericDao<ClassRoom> {
         String sql = "select * from classrooms where id=?";
         ClassRoom classroom = null;
         log.trace("Create connection and statement");
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             log.trace("Create resultSet");
@@ -70,7 +68,7 @@ public class ClassRoomDao implements GenericDao<ClassRoom> {
         log.trace("Start updating classroom object with id {1}", classroom.getId());
         String sql = "update classrooms set buildingNumber=?, roomNumber=? where id=?";
         log.trace("Create connection and statement");
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, classroom.getBuildingNumber());
             statement.setInt(2, classroom.getRoomNumber());
@@ -94,7 +92,7 @@ public class ClassRoomDao implements GenericDao<ClassRoom> {
         log.trace("Start deleting classroom with id {1}", classroom.getId());
         String sql = "delete from classrooms where id=?";
         log.trace("Create connecton and statement");
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, classroom.getId());
             statement.executeUpdate();
@@ -112,7 +110,7 @@ public class ClassRoomDao implements GenericDao<ClassRoom> {
         log.trace("Create list for classrooms");
         List<ClassRoom> classrooms = new ArrayList<>();
         log.trace("Create connection, statement and resultset");
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

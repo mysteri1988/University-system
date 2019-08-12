@@ -15,7 +15,7 @@ public class GroupDao implements GenericDao<Group> {
     @Override
     public Group create(Group group) throws DaoException {
         String sql = "insert into groups (name) values(?)";
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, group.getName());
             ResultSet generatedKey = statement.getGeneratedKeys();
@@ -33,7 +33,7 @@ public class GroupDao implements GenericDao<Group> {
     public Group findById(int id) throws DaoException {
         String sql = "select * from groups where id=?";
         Group group = null;
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -49,7 +49,7 @@ public class GroupDao implements GenericDao<Group> {
     public Group findByStudentId(int id) throws DaoException {
         String sql = "select * from groups join students on students.group_id = groups.id where students.id = ?";
         Group group = null;
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -66,7 +66,7 @@ public class GroupDao implements GenericDao<Group> {
     public Group findByName(String name) throws DaoException {
         Group group = null;
         String sql = "select * from groups where name=?";
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();
@@ -82,7 +82,7 @@ public class GroupDao implements GenericDao<Group> {
     @Override
     public Group update(Group group) throws DaoException {
         String sql = "update groups set name=? where id=?";
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, group.getName());
             statement.setInt(2, group.getId());
@@ -99,7 +99,7 @@ public class GroupDao implements GenericDao<Group> {
     @Override
     public void delete(Group group) throws DaoException {
         String sql = "delete from groups where id=?";
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, group.getId());
             statement.executeUpdate();
@@ -111,7 +111,7 @@ public class GroupDao implements GenericDao<Group> {
     public List<Group> getAll() throws DaoException {
         String sql = "select * from groups order by id";
         List<Group> groups = new ArrayList<>();
-        try (Connection connection = DBConnection.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

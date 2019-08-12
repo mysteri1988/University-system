@@ -12,12 +12,10 @@ import com.foxminded.university.domain.Faculty;
 
 public class FacultyDao implements GenericDao<Faculty> {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-
     @Override
     public Faculty create(Faculty faculty) throws DaoException {
         String sql = "insert into faculties (title) values(?)";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, faculty.getTitle());
             ResultSet generatedKey = statement.getGeneratedKeys();
@@ -35,7 +33,7 @@ public class FacultyDao implements GenericDao<Faculty> {
     public Faculty findById(int id) throws DaoException {
         String sql = "select * from faculties where id=?";
         Faculty faculty = null;
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -51,7 +49,7 @@ public class FacultyDao implements GenericDao<Faculty> {
     @Override
     public Faculty update(Faculty faculty) throws DaoException {
         String sql = "update faculties set title=? where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, faculty.getTitle());
             statement.setInt(2, faculty.getId());
@@ -68,7 +66,7 @@ public class FacultyDao implements GenericDao<Faculty> {
     @Override
     public void delete(Faculty faculty) throws DaoException {
         String sql = "delete from faculties where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, faculty.getId());
         } catch (SQLException e) {
@@ -80,7 +78,7 @@ public class FacultyDao implements GenericDao<Faculty> {
     public List<Faculty> getAll() throws DaoException {
         String sql = "select * from faculties order by id";
         List<Faculty> faculties = new ArrayList<>();
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {

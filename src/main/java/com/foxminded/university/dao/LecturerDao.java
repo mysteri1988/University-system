@@ -12,12 +12,10 @@ import com.foxminded.university.domain.Lecturer;
 
 public class LecturerDao implements GenericDao<Lecturer> {
 
-    private DaoFactory daoFactory = DaoFactory.getInstance();
-
     @Override
     public Lecturer create(Lecturer lecturer) throws DaoException {
         String sql = "insert into lectureres (firstName,surname,age) values(?,?,?)";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, lecturer.getFirstName());
             statement.setString(2, lecturer.getSurname());
@@ -37,7 +35,7 @@ public class LecturerDao implements GenericDao<Lecturer> {
     public Lecturer findById(int id) throws DaoException {
         String sql = "select * from lectureres where id=?";
         Lecturer lecturer = null;
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -53,7 +51,7 @@ public class LecturerDao implements GenericDao<Lecturer> {
     public List<Lecturer> findBySurname(String surname) throws DaoException {
         List<Lecturer> lectureres = new ArrayList<>();
         String sql = "select * from lectureres where surname=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, surname);
             ResultSet resultSet = statement.executeQuery();
@@ -69,7 +67,7 @@ public class LecturerDao implements GenericDao<Lecturer> {
     @Override
     public Lecturer update(Lecturer lecturer) throws DaoException {
         String sql = "update lectureres set firstName=?,surname=?, age=? where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, lecturer.getFirstName());
             statement.setString(2, lecturer.getSurname());
@@ -88,7 +86,7 @@ public class LecturerDao implements GenericDao<Lecturer> {
     @Override
     public void delete(Lecturer lecturer) throws DaoException {
         String sql = "delete from lectureres where id=?";
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setInt(1, lecturer.getId());
             statement.executeUpdate();
@@ -101,7 +99,7 @@ public class LecturerDao implements GenericDao<Lecturer> {
     public List<Lecturer> getAll() throws DaoException {
         String sql = "select * from lectureres order by id";
         List<Lecturer> lectureres = new ArrayList<>();
-        try (Connection connection = daoFactory.getConnection();
+        try (Connection connection = DaoFactory.getConnection();
                 PreparedStatement statement = connection.prepareStatement(sql);
                 ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
