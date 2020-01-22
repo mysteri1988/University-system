@@ -1,10 +1,37 @@
 package com.foxminded.university.domain;
 
-public class Person {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
+import javax.persistence.MappedSuperclass;
+import javax.persistence.Table;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
+@MappedSuperclass
+public class Person {
+    
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+    
+    @Column(name="firstname")
+    @NotNull
+    @Size(min=2, max=20, message="The firstname should be between 2 and 20 letters")
     private String firstName;
+    
+    @Column(name="surname")
+    @NotNull
+    @Size(min=2, max=20, message="The lastname should be between 2 and 20 letters")
     private String surname;
+    
+    @Column(name="age")
     private int age;
 
     public Person() {
@@ -17,7 +44,6 @@ public class Person {
     }
 
     public Person(int id, String firstName, String surname, int age) {
-        super();
         this.id = id;
         this.firstName = firstName;
         this.surname = surname;

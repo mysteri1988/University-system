@@ -1,45 +1,28 @@
 package com.foxminded.university.ui;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.StudentService;
+import com.foxminded.university.service.StudentServiceInterface;
 
-@WebServlet("/deletestudent")
-public class DeleteStudent extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@Controller
+public class DeleteStudent {
 
-    private StudentService studentService;
+    @Autowired
+    private StudentServiceInterface studentService;
 
-    @Override
-    public void init() {
-        studentService = new StudentService();
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int id = 0;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            request.getRequestDispatcher("/error").forward(request, response);
-            return;
-        }
-        Student student = studentService.findById(id);
-        if (student == null) {
-            request.setAttribute("error", "Can't find selected student");
-            request.getRequestDispatcher("/error").forward(request, response);
-            return;
-        }
+    @GetMapping(path = "/deletestudent")
+    public String deleteStudent(@RequestParam("id") int theId) {
+        Student student = studentService.findById(theId);
         studentService.delete(student);
-        response.sendRedirect("students");
+        return "redirect:/students";
     }
 
 }

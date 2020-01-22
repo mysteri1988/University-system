@@ -1,32 +1,36 @@
 package com.foxminded.university.ui;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Group;
-import com.foxminded.university.service.GroupService;
+import com.foxminded.university.domain.Student;
+import com.foxminded.university.service.GroupServiceInterface;
+import com.foxminded.university.service.StudentServiceInterface;
 
-@WebServlet("/loadstudentform")
-public class LoadGroup extends HttpServlet {
-    private static final long serialVersionUID = 1L;
-    private GroupService groupService;
+@Controller
+public class LoadGroup {
 
-    @Override
-    public void init() {
-        groupService = new GroupService();
-    }
+    @Autowired
+    private StudentServiceInterface studentService;
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        List<Group> groups = groupService.getAll();
-        request.setAttribute("group_list", groups);
-        request.getRequestDispatcher("/add-student-form.jsp").forward(request, response);
+    @Autowired
+    private GroupServiceInterface groupService;
+
+    @GetMapping("/group")
+    public String loadGroup(@RequestParam("id") int theId, Model theModel) {
+        Group group = groupService.findById(theId);
+        List<Student> students = studentService.findByGroupId(theId);
+        theModel.addAttribute("student_list", students);
+        theModel.addAttribute("group", group);
+        return "group-consist";
+
     }
 
 }

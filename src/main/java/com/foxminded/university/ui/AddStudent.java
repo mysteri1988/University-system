@@ -1,50 +1,39 @@
 package com.foxminded.university.ui;
 
-import java.io.IOException;
 import java.util.List;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.GroupService;
-import com.foxminded.university.service.StudentService;
+import com.foxminded.university.service.GroupServiceInterface;
+import com.foxminded.university.service.StudentServiceInterface;
 
-@WebServlet("/addstudent")
-public class AddStudent extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@Controller
+public class AddStudent {
 
-    private StudentService studentService;
+    @Autowired
+    private StudentServiceInterface studentService;
 
-    @Override
-    public void init() {
-        studentService = new StudentService();
-    }
+    @Autowired
+    private GroupServiceInterface groupService;
 
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        String firstName = request.getParameter("firstName");
-        String surname = request.getParameter("surname");
-        String returnPage = "";
-        if (firstName.isEmpty() || surname.isEmpty()) {
-            request.setAttribute("exception", "The firstName or surname field is empty");
-            returnPage = "/error";
-        } else {
-            try {
-                int age = Integer.parseInt(request.getParameter("age"));
-                int groupId = Integer.parseInt(request.getParameter("groupId"));
-                Student student = new Student(firstName, surname, age, groupId);
-                studentService.create(student);
-                returnPage = "list-students.jsp";
-            } catch (NumberFormatException e) {
-                returnPage = "/error";
-            }
+    @PostMapping("/addstudent")
+    public String addStudent(@ModelAttribute("student") @Validated Student student, BindingResult result, Model model) {
+        if (result.hasErrors()) {
+            List<Group> groups = groupService.getAll();
+            model.addAttribute("group_list", groups);
+            return "add-student-form";
         }
-        request.getRequestDispatcher(returnPage).forward(request, response);
+        studentService.create(student);
+        return "redirect:/students";
     }
 }

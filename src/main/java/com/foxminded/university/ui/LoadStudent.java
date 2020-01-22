@@ -1,49 +1,38 @@
 package com.foxminded.university.ui;
 
-import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.GroupService;
-import com.foxminded.university.service.StudentService;
+import com.foxminded.university.service.GroupServiceInterface;
+import com.foxminded.university.service.StudentServiceInterface;
 
-@WebServlet("/loadstudent")
-public class LoadStudent extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+@Controller
+public class LoadStudent {
 
-    private StudentService studentService;
-    private GroupService groupService;
+    @Autowired
+    private StudentServiceInterface studentService;
 
-    @Override
-    public void init() {
-        studentService = new StudentService();
-        groupService=new GroupService();
+    @Autowired
+    private GroupServiceInterface groupService;
+
+    @GetMapping("/loadstudent")
+    public String loadStudent(@RequestParam("id") int theId, Model theModel) {
+        List<Group> groups = groupService.getAll();
+        Student student = studentService.findById(theId);
+        theModel.addAttribute("student", student);
+        theModel.addAttribute("group_list", groups);
+        return "update-student";
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        int id = 0;
-        try {
-            id = Integer.parseInt(request.getParameter("id"));
-        } catch (NumberFormatException e) {
-            request.getRequestDispatcher("/error").forward(request, response);
-        }
-        List<Group> groups=groupService.getAll();
-        Student student = studentService.findById(id);
-        if (student == null) {
-            request.setAttribute("error", "Can't find selected student");
-            request.getRequestDispatcher("/error").forward(request, response);
-        }
-        request.setAttribute("student", student);
-        request.setAttribute("group_list", groups);
-        request.getRequestDispatcher("/update-student.jsp").forward(request, response);
-    }
-
 }

@@ -1,9 +1,18 @@
 package com.foxminded.university.domain;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "students")
 public class Student extends Person {
 
+    @ManyToOne(cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+    @JoinColumn(name = "group_id")
     private Group group;
-    private int groupId;
 
     public Student() {
     };
@@ -12,26 +21,13 @@ public class Student extends Person {
         super(firstName, surname, age);
     }
 
-    public Student(int id, String firstName, String surname, int age, int groupId) {
-        super(id, firstName, surname, age);
-        this.groupId = groupId;
-    }
-
-    public Student(String firstName, String surname, int age, int groupId) {
-        super(firstName, surname, age);
-        this.groupId = groupId;
-    }
-
-    public int getGroupId() {
-        return groupId;
-    }
-
-    public void setGroupId(int groupId) {
-        this.groupId = groupId;
-    }
-
     public Group getGroup() {
         return group;
+    }
+
+    public Student(Group group) {
+        super();
+        this.group = group;
     }
 
     public void setGroup(Group group) {
@@ -44,6 +40,16 @@ public class Student extends Person {
     @Override
     public String toString() {
         return "Student [" + super.toString() + " " + group + "]";
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
 }
