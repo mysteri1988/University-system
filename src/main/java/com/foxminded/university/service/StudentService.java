@@ -2,53 +2,19 @@ package com.foxminded.university.service;
 
 import java.util.List;
 
-import javax.transaction.Transactional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.foxminded.university.dao.StudentDao;
 import com.foxminded.university.domain.Student;
 
-@Service
-public class StudentService implements StudentServiceInterface {
+public interface StudentService {
 
-    @Autowired
-    private StudentDao studentDao;
+    public void create(Student student);
 
-    @Override
-    @Transactional
-    public void create(Student student) {
-        studentDao.create(student);
-    }
+    public Student findById(int id);
 
-    @Override
-    @Transactional
-    public Student findById(int id) {
-        return studentDao.findById(id);
-    }
+    public List<Student> findByGroupId(int groupId);
 
-    @Override
-    @Transactional
-    public List<Student> findByGroupId(int groupId) {
-        return studentDao.findGroupId(groupId);
-    }
+    public void update(Student student);
 
-    @Override
-    @Transactional
-    public void update(Student student) {
-        studentDao.update(student);
-    }
+    public void delete(Student student);
 
-    @Override
-    @Transactional
-    public void delete(Student student) {
-        studentDao.delete(student);
-    }
-
-    @Override
-    @Transactional
-    public List<Student> getAll() {
-        return studentDao.getAll();
-    }
+    public List<Student> getAll();
 }

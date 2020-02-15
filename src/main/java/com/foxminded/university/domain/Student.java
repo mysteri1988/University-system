@@ -41,15 +41,4 @@ public class Student extends Person {
     public String toString() {
         return "Student [" + super.toString() + " " + group + "]";
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
-    }
-
-    @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-
 }

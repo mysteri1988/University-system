@@ -2,60 +2,22 @@ package com.foxminded.university.dao;
 
 import java.util.List;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
-
 import com.foxminded.university.domain.Group;
-import com.foxminded.university.domain.Student;
 
-@Repository
-public class GroupDao implements GroupDaoInterface {
+public interface GroupDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
+    public void create(Group group);
 
-    @Override
-    public void create(Group group) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.save(group);
-    }
+    public Group findById(int id);
 
-    @Override
-    public Group findById(int id) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        return currentSession.get(Group.class, id);
-    }
+    public Group findByStudentId(int id);
 
-    @Override
-    public Group findByStudentId(int id) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        Student student = currentSession.get(Student.class, id);
-        return student.getGroup();
-    }
+    public Group findByName(String name);
 
-    @Override
-    public Group findByName(String name) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        return currentSession.get(Group.class, name);
-    }
+    public void update(Group group);
 
-    @Override
-    public void update(Group group) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.saveOrUpdate(group);
-    }
+    public void delete(Group group);
 
-    @Override
-    public void delete(Group group) {
-        Session currentSession = sessionFactory.getCurrentSession();
-        currentSession.delete(group);
-    }
+    public List<Group> getAll();
 
-    @Override
-    public List<Group> getAll() {
-        Session currentSession = sessionFactory.getCurrentSession();
-        return currentSession.createQuery("from Group order by id", Group.class).getResultList();
-    }
 }

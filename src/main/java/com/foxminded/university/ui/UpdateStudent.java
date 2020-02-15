@@ -14,17 +14,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.GroupServiceInterface;
-import com.foxminded.university.service.StudentServiceInterface;
+import com.foxminded.university.service.GroupService;
+import com.foxminded.university.service.StudentService;
 
 @Controller
 public class UpdateStudent {
 
-    @Autowired
-    private StudentServiceInterface studentService;
+    private StudentService studentService;
+
+    private GroupService groupService;
 
     @Autowired
-    private GroupServiceInterface groupService;
+    public UpdateStudent(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
+    }
 
     @PostMapping("/updatestudent")
     public String updateStudent(@ModelAttribute("student") @Validated Student student, BindingResult result,

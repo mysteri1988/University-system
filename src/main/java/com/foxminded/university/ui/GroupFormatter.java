@@ -8,17 +8,22 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
 import com.foxminded.university.domain.Group;
-import com.foxminded.university.service.GroupServiceInterface;
+import com.foxminded.university.service.GroupServiceImpl;
+import com.foxminded.university.service.GroupService;
 
 @Component
 public class GroupFormatter implements Formatter<Group> {
 
+    private GroupService groupService;
+
     @Autowired
-    GroupServiceInterface groupService;
+    public GroupFormatter(GroupService groupService) {
+        this.groupService = groupService;
+    }
 
     @Override
     public String print(Group group, Locale arg1) {
-        int id=group.getId();
+        int id = group.getId();
         return Integer.toString(id);
     }
 

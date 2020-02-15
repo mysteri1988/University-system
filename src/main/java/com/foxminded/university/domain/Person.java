@@ -15,23 +15,23 @@ import javax.validation.constraints.Size;
 
 @MappedSuperclass
 public class Person {
-    
+
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "id")
     private int id;
-    
-    @Column(name="firstname")
+
+    @Column(name = "firstname")
     @NotNull
-    @Size(min=2, max=20, message="The firstname should be between 2 and 20 letters")
+    @Size(min = 2, max = 20, message = "The firstname should be between 2 and 20 letters")
     private String firstName;
-    
-    @Column(name="surname")
+
+    @Column(name = "surname")
     @NotNull
-    @Size(min=2, max=20, message="The lastname should be between 2 and 20 letters")
+    @Size(min = 2, max = 20, message = "The lastname should be between 2 and 20 letters")
     private String surname;
-    
-    @Column(name="age")
+
+    @Column(name = "age")
     private int age;
 
     public Person() {
@@ -86,7 +86,7 @@ public class Person {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + id;
+        result = prime * result + getId();
         return result;
     }
 

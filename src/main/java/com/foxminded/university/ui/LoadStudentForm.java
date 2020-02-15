@@ -9,13 +9,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.GroupServiceInterface;
+import com.foxminded.university.service.GroupService;
 
 @Controller
 public class LoadStudentForm {
 
+    private GroupService groupService;
+
     @Autowired
-    private GroupServiceInterface groupService;
+    public LoadStudentForm(GroupService groupService) {
+        this.groupService = groupService;
+    }
 
     @GetMapping("/loadstudentform")
     public String loadStudentForm(Model theModel) {

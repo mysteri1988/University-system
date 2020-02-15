@@ -11,17 +11,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.GroupServiceInterface;
-import com.foxminded.university.service.StudentServiceInterface;
+import com.foxminded.university.service.GroupService;
+import com.foxminded.university.service.StudentService;
 
 @Controller
 public class LoadGroup {
 
-    @Autowired
-    private StudentServiceInterface studentService;
+    private StudentService studentService;
+
+    private GroupService groupService;
 
     @Autowired
-    private GroupServiceInterface groupService;
+    public LoadGroup(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
+    }
 
     @GetMapping("/group")
     public String loadGroup(@RequestParam("id") int theId, Model theModel) {

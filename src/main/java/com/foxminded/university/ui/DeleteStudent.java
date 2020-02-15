@@ -10,13 +10,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.StudentServiceInterface;
+import com.foxminded.university.service.StudentService;
 
 @Controller
 public class DeleteStudent {
 
+    private StudentService studentService;
+
     @Autowired
-    private StudentServiceInterface studentService;
+    public DeleteStudent(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping(path = "/deletestudent")
     public String deleteStudent(@RequestParam("id") int theId) {

@@ -12,13 +12,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.foxminded.university.domain.Group;
-import com.foxminded.university.service.GroupServiceInterface;
+import com.foxminded.university.service.GroupService;
 
 @Controller
 public class ListGroups {
 
+    private GroupService groupService;
+
     @Autowired
-    private GroupServiceInterface groupService;
+    public ListGroups(GroupService groupService) {
+        this.groupService = groupService;
+    }
 
     @GetMapping(path = "/groups")
     public String listGroups(Model theModel) {

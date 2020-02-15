@@ -8,17 +8,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.GroupServiceInterface;
-import com.foxminded.university.service.StudentServiceInterface;
+import com.foxminded.university.service.GroupService;
+import com.foxminded.university.service.StudentService;
 
 @Controller
 public class StudentInformation {
 
-    @Autowired
-    private StudentServiceInterface studentService;
+    private StudentService studentService;
+
+    private GroupService groupService;
 
     @Autowired
-    private GroupServiceInterface groupService;
+    public StudentInformation(StudentService studentService, GroupService groupService) {
+        this.studentService = studentService;
+        this.groupService = groupService;
+    }
 
     @GetMapping("/student")
     public String loadStudentCard(@RequestParam("id") int theId, Model theModel) {

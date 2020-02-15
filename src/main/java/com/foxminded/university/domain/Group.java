@@ -17,7 +17,7 @@ import javax.persistence.Table;
 public class Group {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     @Column(name = "id")
     private int id;
 
@@ -77,9 +77,9 @@ public class Group {
     @Override
     public int hashCode() {
         final int prime = 31;
-        long result = 1;
-        result = prime * result + id;
-        return (int) result;
+        int result = 1;
+        result = prime * result + getId();
+        return result;
     }
 
     @Override
@@ -96,7 +96,7 @@ public class Group {
         Group other = (Group) obj;
         if (id != other.id) {
             return false;
-        } else
+        }
         return true;
     }
 

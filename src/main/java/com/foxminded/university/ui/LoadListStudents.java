@@ -7,13 +7,18 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.StudentServiceInterface;
+import com.foxminded.university.service.StudentServiceImpl;
+import com.foxminded.university.service.StudentService;
 
 @Controller
 public class LoadListStudents {
 
+    private StudentService studentService;
+    
     @Autowired
-    private StudentServiceInterface studentService;
+    public LoadListStudents(StudentService studentService) {
+        this.studentService = studentService;
+    }
 
     @GetMapping("/students")
     public String listStudents(Model theModel) {
