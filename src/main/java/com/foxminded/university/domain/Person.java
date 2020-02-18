@@ -21,7 +21,7 @@ public class Person {
     @Column(name = "id")
     private int id;
 
-    @Column(name = "firstname")
+    @Column(name = "firstName")
     @NotNull
     @Size(min = 2, max = 20, message = "The firstname should be between 2 and 20 letters")
     private String firstName;
