@@ -25,7 +25,6 @@ public class LoadStudent {
 
     private GroupService groupService;
 
-    @Autowired
     public LoadStudent(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
         this.groupService = groupService;

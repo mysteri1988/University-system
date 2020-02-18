@@ -23,7 +23,7 @@ public class AddStudent {
     private StudentService studentService;
     private GroupService groupService;
 
-    @Autowired
+    
     public AddStudent(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
         this.groupService = groupService;

@@ -19,7 +19,6 @@ public class ListGroups {
 
     private GroupService groupService;
 
-    @Autowired
     public ListGroups(GroupService groupService) {
         this.groupService = groupService;
     }

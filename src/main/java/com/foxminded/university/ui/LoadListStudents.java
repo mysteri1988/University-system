@@ -14,8 +14,7 @@ import com.foxminded.university.service.StudentService;
 public class LoadListStudents {
 
     private StudentService studentService;
-    
-    @Autowired
+
     public LoadListStudents(StudentService studentService) {
         this.studentService = studentService;
     }

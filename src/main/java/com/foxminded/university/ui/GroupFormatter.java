@@ -16,7 +16,6 @@ public class GroupFormatter implements Formatter<Group> {
 
     private GroupService groupService;
 
-    @Autowired
     public GroupFormatter(GroupService groupService) {
         this.groupService = groupService;
     }

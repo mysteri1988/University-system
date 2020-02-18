@@ -18,7 +18,6 @@ public class StudentInformation {
 
     private GroupService groupService;
 
-    @Autowired
     public StudentInformation(StudentService studentService, GroupService groupService) {
         this.studentService = studentService;
         this.groupService = groupService;

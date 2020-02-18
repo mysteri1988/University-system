@@ -16,7 +16,6 @@ public class LoadStudentForm {
 
     private GroupService groupService;
 
-    @Autowired
     public LoadStudentForm(GroupService groupService) {
         this.groupService = groupService;
     }
