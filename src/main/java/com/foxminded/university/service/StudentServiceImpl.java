@@ -12,35 +12,31 @@ import com.foxminded.university.dao.StudentDaoImpl;
 import com.foxminded.university.domain.Student;
 
 @Service
+@Transactional
 public class StudentServiceImpl implements StudentService {
 
     private StudentDao studentDao;
 
-    @Autowired
     public StudentServiceImpl(StudentDao studentDao) {
         this.studentDao = studentDao;
     }
 
     @Override
-    @Transactional
     public void create(Student student) {
         studentDao.create(student);
     }
 
     @Override
-    @Transactional
     public Student findById(int id) {
         return studentDao.findById(id);
     }
 
     @Override
-    @Transactional
     public List<Student> findByGroupId(int groupId) {
         return studentDao.findGroupId(groupId);
     }
 
     @Override
-    @Transactional
     public void update(Student student) {
         studentDao.update(student);
     }
@@ -52,7 +48,6 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    @Transactional
     public List<Student> getAll() {
         return studentDao.getAll();
     }
