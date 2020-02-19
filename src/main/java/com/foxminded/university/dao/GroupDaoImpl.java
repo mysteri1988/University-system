@@ -11,7 +11,7 @@ import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
 @Repository
-public class GroupDaoImpl implements GroupDao {
+public class GroupDaoImpl implements GroupDao,GenericDaoMethods<Group>{
 
     private SessionFactory sessionFactory;
 
