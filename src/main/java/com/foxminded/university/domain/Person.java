@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,7 +18,8 @@ import javax.validation.constraints.Size;
 public class Person {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @SequenceGenerator(name="student_generator", sequenceName = "stud_seq", allocationSize=4)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="student_generator")
     @Column(name = "id")
     private int id;
 
