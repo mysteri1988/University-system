@@ -16,8 +16,11 @@ import com.foxminded.university.domain.Student;
 @Repository
 public class StudentDaoImpl implements StudentDao {
 
-    @Autowired
     private SessionFactory sessionFactory;
+
+    public StudentDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void create(Student student) {

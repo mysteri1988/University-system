@@ -13,8 +13,11 @@ import com.foxminded.university.domain.Student;
 @Repository
 public class GroupDaoImpl implements GroupDao {
 
-    @Autowired
     private SessionFactory sessionFactory;
+
+    public GroupDaoImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
 
     @Override
     public void create(Group group) {
