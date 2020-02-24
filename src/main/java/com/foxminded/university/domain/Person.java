@@ -18,9 +18,9 @@ import javax.validation.constraints.Size;
 public class Person {
 
     @Id
-    @SequenceGenerator(name="student_generator", sequenceName = "stud_seq", allocationSize=4)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="student_generator")
-    @Column(name = "id")
+    @SequenceGenerator(name = "student_generator", sequenceName = "stud_seq",initialValue = 1, allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_generator")
+    @Column(name = "id",updatable = false, nullable = false)
     private int id;
 
     @Column(name = "firstName")

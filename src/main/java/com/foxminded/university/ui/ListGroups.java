@@ -25,7 +25,7 @@ public class ListGroups {
 
     @GetMapping(path = "/groups")
     public String listGroups(Model theModel) {
-        List<Group> groups = groupService.getAll();
+        List<Group> groups = groupService.findAll();
         theModel.addAttribute("group_list", groups);
         return "list-groups";
     }

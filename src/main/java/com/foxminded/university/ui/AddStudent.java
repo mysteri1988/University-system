@@ -32,7 +32,7 @@ public class AddStudent {
     @PostMapping("/addstudent")
     public String addStudent(@ModelAttribute("student") @Validated Student student, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            List<Group> groups = groupService.getAll();
+            List<Group> groups = groupService.findAll();
             model.addAttribute("group_list", groups);
             return "add-student-form";
         }

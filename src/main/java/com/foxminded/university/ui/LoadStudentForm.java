@@ -23,7 +23,7 @@ public class LoadStudentForm {
     @GetMapping("/loadstudentform")
     public String loadStudentForm(Model theModel) {
         Student student = new Student();
-        List<Group> groups = groupService.getAll();
+        List<Group> groups = groupService.findAll();
         theModel.addAttribute("group_list", groups);
         theModel.addAttribute("student", student);
         return "add-student-form";

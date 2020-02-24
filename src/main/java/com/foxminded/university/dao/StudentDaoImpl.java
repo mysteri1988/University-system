@@ -14,7 +14,7 @@ import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
 @Repository
-public class StudentDaoImpl implements StudentDao,CrudDao<Student>{
+public class StudentDaoImpl implements StudentDao {
 
     private SessionFactory sessionFactory;
 
@@ -53,12 +53,11 @@ public class StudentDaoImpl implements StudentDao,CrudDao<Student>{
     @Override
     public void delete(Student student) {
         Session currentSession = sessionFactory.getCurrentSession();
-        Student currentStudent = currentSession.get(Student.class, student.getId());
-        currentSession.delete(currentStudent);
+        currentSession.delete(student);
     }
 
     @Override
-    public List<Student> getAll() {
+    public List<Student> findAll() {
         Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.createQuery("from Student order by id", Student.class).getResultList();
 

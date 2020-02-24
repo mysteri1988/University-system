@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.foxminded.university.domain.Student;
 
-public interface StudentDao {
+public interface StudentDao extends CrudDao<Student> {
 
     public void create(Student student);
 
@@ -16,6 +16,6 @@ public interface StudentDao {
 
     public void delete(Student student);
 
-    public List<Student> getAll();
+    public List<Student> findAll();
 
 }

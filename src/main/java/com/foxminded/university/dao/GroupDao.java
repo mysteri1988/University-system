@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.foxminded.university.domain.Group;
 
-public interface GroupDao {
+public interface GroupDao extends CrudDao<Group> {
 
     public void create(Group group);
 
@@ -18,6 +18,6 @@ public interface GroupDao {
 
     public void delete(Group group);
 
-    public List<Group> getAll();
+    public List<Group> findAll();
 
 }

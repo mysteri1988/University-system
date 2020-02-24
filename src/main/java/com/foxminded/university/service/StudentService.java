@@ -16,5 +16,5 @@ public interface StudentService {
 
     public void delete(Student student);
 
-    public List<Student> getAll();
+    public List<Student> findAll();
 }

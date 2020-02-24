@@ -11,7 +11,7 @@ import com.foxminded.university.domain.Group;
 import com.foxminded.university.domain.Student;
 
 @Repository
-public class GroupDaoImpl implements GroupDao,CrudDao<Group>{
+public class GroupDaoImpl implements GroupDao {
 
     private SessionFactory sessionFactory;
 
@@ -57,7 +57,7 @@ public class GroupDaoImpl implements GroupDao,CrudDao<Group>{
     }
 
     @Override
-    public List<Group> getAll() {
+    public List<Group> findAll() {
         Session currentSession = sessionFactory.getCurrentSession();
         return currentSession.createQuery("from Group order by id", Group.class).getResultList();
     }

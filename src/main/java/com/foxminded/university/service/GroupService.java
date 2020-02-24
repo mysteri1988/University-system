@@ -18,6 +18,6 @@ public interface GroupService {
 
     public void delete(Group group);
 
-    public List<Group> getAll();
+    public List<Group> findAll();
 
 }

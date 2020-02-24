@@ -32,7 +32,7 @@ public class LoadStudent {
 
     @GetMapping("/loadstudent")
     public String loadStudent(@RequestParam("id") int theId, Model theModel) {
-        List<Group> groups = groupService.getAll();
+        List<Group> groups = groupService.findAll();
         Student student = studentService.findById(theId);
         theModel.addAttribute("student", student);
         theModel.addAttribute("group_list", groups);

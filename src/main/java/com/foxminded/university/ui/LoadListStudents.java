@@ -21,7 +21,7 @@ public class LoadListStudents {
 
     @GetMapping("/students")
     public String listStudents(Model theModel) {
-        List<Student> students = studentService.getAll();
+        List<Student> students = studentService.findAll();
         theModel.addAttribute("student_list", students);
         return "list-students";
     }

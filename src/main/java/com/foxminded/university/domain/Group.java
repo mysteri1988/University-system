@@ -18,8 +18,8 @@ import javax.persistence.Table;
 public class Group {
 
     @Id
-    @SequenceGenerator(name="group_generator", sequenceName = "group_seq", allocationSize=4)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator="group_generator")   
+    @SequenceGenerator(name = "group_generator", sequenceName = "group_seq", allocationSize = 4)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_generator")
     @Column(name = "id")
     private int id;
 

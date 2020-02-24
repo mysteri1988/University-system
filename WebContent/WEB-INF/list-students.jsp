@@ -36,10 +36,10 @@
           <tr>
             <td><a href="${studentLink}">${student.firstName}
                 ${student.surname}</a></td>
-            <td><a href="${loadStudent}">Update</a>
-              <form action="${deleteStudent}" method="POST">
-                <input type="submit" value="Delete" />
-              </form></td>
+            <td><a href="${loadStudent}">Update</a>|<a
+              href="${deleteStudent}"
+              onclick="if (!(confirm('Are you sure you want to delete this customer'))) return false">Delete</a>
+            </td>
           </tr>
         </c:forEach>
       </table>

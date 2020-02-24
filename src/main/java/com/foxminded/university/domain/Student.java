@@ -21,13 +21,12 @@ public class Student extends Person {
         super(firstName, surname, age);
     }
 
-    public Group getGroup() {
-        return group;
+    public Student(Group group) {
+        this.group = group;
     }
 
-    public Student(Group group) {
-        super();
-        this.group = group;
+    public Group getGroup() {
+        return group;
     }
 
     public void setGroup(Group group) {
