@@ -144,20 +144,20 @@
 
   <!-- Service layer beans -->
   <bean id="studentServiceImpl"
-    class="com.foxminded.university.service.StudentServiceImpl">
+    class="com.foxminded.university.service.impl.StudentServiceImpl">
     <constructor-arg ref="studentDaoImpl" />
   </bean>
 
   <bean id="groupServiceImpl"
-    class="com.foxminded.university.service.GroupServiceImpl">
+    class="com.foxminded.university.service.impl.GroupServiceImpl">
     <constructor-arg ref="groupDaoImpl" />
   </bean>
 
   <!-- DAO layer beans -->
   <bean id="studentDaomImpl"
-    class="com.foxminded.university.dao.StudentDaoImpl" />
+    class="com.foxminded.university.dao.impl.StudentDaoImpl" />
 
   <bean id="groupDaoImpl"
-    class="com.foxminded.university.dao.GroupDaoImpl" />
+    class="com.foxminded.university.dao.impl.GroupDaoImpl" />
 
 </beans>

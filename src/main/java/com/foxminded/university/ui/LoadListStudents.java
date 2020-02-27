@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.foxminded.university.domain.Student;
-import com.foxminded.university.service.StudentServiceImpl;
 import com.foxminded.university.service.StudentService;
+import com.foxminded.university.service.impl.StudentServiceImpl;
 
 @Controller
 public class LoadListStudents {

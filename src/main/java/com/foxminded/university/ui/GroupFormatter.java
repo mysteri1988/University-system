@@ -8,8 +8,8 @@ import org.springframework.format.Formatter;
 import org.springframework.stereotype.Component;
 
 import com.foxminded.university.domain.Group;
-import com.foxminded.university.service.GroupServiceImpl;
 import com.foxminded.university.service.GroupService;
+import com.foxminded.university.service.impl.GroupServiceImpl;
 
 @Component
 public class GroupFormatter implements Formatter<Group> {
