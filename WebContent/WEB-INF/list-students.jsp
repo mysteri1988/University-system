@@ -38,7 +38,7 @@
                 ${student.surname}</a></td>
             <td><a href="${loadStudent}">Update</a>|<a
               href="${deleteStudent}"
-              onclick="if (!(confirm('Are you sure you want to delete this customer'))) return false">Delete</a>
+              onclick="if (!(confirm('Are you sure you want to delete this student'))) return false">Delete</a>
             </td>
           </tr>
         </c:forEach>
